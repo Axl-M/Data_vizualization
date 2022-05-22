@@ -24,10 +24,16 @@ with open(filename) as f:
         # и автоматически возвращает каждую строку после текущей позиции. Так как заголовок уже прочитан,
         # цикл продолжается со второй строки, в которой начинаются фактические данные.
         # При каждом проходе цикла значение с индексом 1 (второй столбец) присоединяется к списку highs
-        current_date = datetime.strptime(row[0], "%Y-%m-%d")
-        dates.append(current_date)
-        highs.append(int(row[1]))
-        lows.append(int(row[3]))
+        try:
+            current_date = datetime.strptime(row[0], "%Y-%m-%d")
+            high =int(row[1])
+            low =int(row[3])
+        except ValueError:
+            print(current_date, 'missing data')
+        else:
+            dates.append(current_date)
+            highs.append(high)
+            lows.append(low)
 
 # print(highs)
 # нанесение данных на диаграмму
@@ -37,7 +43,9 @@ plt.plot(dates, lows, c='blue', alpha=0.5)
 plt.fill_between(dates, highs, lows, facecolor='blue', alpha=0.1)
 
 # Форматирование диаграммы.
-plt.title("Daily high and low temperatures, 2014", fontsize=24)
+# plt.title("Daily high and low temperatures, 2014", fontsize=24)
+title = "Daily high and low temperatures - 2014\nDeath Valley, CA"
+plt.title(title, fontsize=24)
 plt.xlabel('', fontsize=16)
 fig.autofmt_xdate()     # вывод дат по диагонали
 plt.ylabel("Temperature (F)", fontsize=16)
