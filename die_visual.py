@@ -5,8 +5,15 @@ die = Die()
 
 # Моделирование серии бросков с сохранением результатов в списке.
 results = []
-for roll_number in range(100):
+for roll_number in range(1000):
     result = die.roll()
     results.append(result)
 
-print(results)
+# Анализ результатов.
+frequencies = []
+for value in range(1, die.num_sides + 1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+print(frequencies)
+
