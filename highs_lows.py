@@ -3,7 +3,8 @@ from matplotlib import pyplot as plt
 from datetime import datetime
 
 # Чтение дат, температурных максимумов и минимумов из файла.
-filename = 'sitka_weather_2014.csv'
+# filename = 'sitka_weather_2014.csv'
+filename = 'death_valley_2014.csv'
 with open(filename) as f:
     reader = csv.reader(f)      # объект чтения данных для файла
     # функция next(), возвращает следующую строку файла для полученного объекта чтения данных.
