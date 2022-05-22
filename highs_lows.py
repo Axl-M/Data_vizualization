@@ -8,3 +8,7 @@ with open(filename) as f:
     header_row = next(reader)
     print(header_row)
 
+# Заголовок AKDT означает «Alaska Daylight Time» (Аляска, летнее время).
+# Позиция заголовка указывает на то, что первым значением в каждой из следующих строк является дата или время.
+for index, column_header in enumerate(header_row):
+    print(index, column_header)
