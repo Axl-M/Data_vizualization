@@ -2,8 +2,8 @@ import csv
 from matplotlib import pyplot as plt
 from datetime import datetime
 
-# Чтение дат и температурных максимумов из файла.
-filename = 'sitka_weather_07-2014.csv'
+# Чтение дат, температурных максимумов и минимумов из файла.
+filename = 'sitka_weather_2014.csv'
 with open(filename) as f:
     reader = csv.reader(f)      # объект чтения данных для файла
     # функция next(), возвращает следующую строку файла для полученного объекта чтения данных.
@@ -17,7 +17,7 @@ with open(filename) as f:
 # for index, column_header in enumerate(header_row):
 #     print(index, column_header)
 
-    dates, highs = [], []
+    dates, highs, lows = [], [], []
     for row in reader:      # перебирает остальные строки в файле
         # Объект reader продолжает с того места, на котором он остановился в ходе чтения файла CSV,
         # и автоматически возвращает каждую строку после текущей позиции. Так как заголовок уже прочитан,
@@ -26,14 +26,16 @@ with open(filename) as f:
         current_date = datetime.strptime(row[0], "%Y-%m-%d")
         dates.append(current_date)
         highs.append(int(row[1]))
+        lows.append(int(row[3]))
 
 # print(highs)
 # нанесение данных на диаграмму
 fig = plt.figure(dpi=128, figsize=(10, 6))
 plt.plot(dates, highs, c='red')
+plt.plot(dates, lows, c='blue')
 
 # Форматирование диаграммы.
-plt.title("Daily high temperatures, July 2014", fontsize=24)
+plt.title("Daily high and low temperatures, 2014", fontsize=24)
 plt.xlabel('', fontsize=16)
 fig.autofmt_xdate()     # вывод дат по диагонали
 plt.ylabel("Temperature (F)", fontsize=16)
