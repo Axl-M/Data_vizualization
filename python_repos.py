@@ -33,10 +33,15 @@ repo_dicts = response_dict['items']  # список словарей, кажды
 # print("Repositories returned:", len(repo_dicts))    # 30
 
 # print("\nSelected information about each repository:")
-names, stars = [], []
+names, plot_dicts = [], []
 for repo_dict in repo_dicts:
-    names.append(repo_dict['name'])
-    stars.append(repo_dict['stargazers_count'])
+    names.append(repo_dict['name'])     # для построения меток оси x
+    plot_dict = {
+        'value': repo_dict['stargazers_count'],
+        'label': repo_dict['description']
+    }
+    plot_dicts.append(plot_dict)
+    # stars.append(repo_dict['stargazers_count'])
 
     # print('\nName:', repo_dict['name'])
     # print('Owner:', repo_dict['owner']['login'])
@@ -59,5 +64,8 @@ chart = pygal.Bar(my_config, style=my_style)
 # chart.title = 'Most-Starred Python Projects on GitHub'
 chart.title = 'Самые звездные Python проекты на GitHub'
 chart.x_labels = names
-chart.add('', stars)
-chart.render_to_file('python_repos.svg')
+chart.add('', plot_dicts)  # передаем список значений
+# Если передать СПИСОК СЛОВАРЕЙ. Каждый словарь содержит два ключа: 'value' и 'label'.
+# Pygal использует число, связанное с 'value', для определения высоты каждого столбца,
+# а строка, связанная с 'label', используется для создания подсказки столбца.
+chart.render_to_file('python_repos.svg')  # open in browser
