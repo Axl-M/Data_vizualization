@@ -9,3 +9,19 @@ https://api.github.com/search/repositories?q=language:python&sort=stars
 для которых основным языком указан Python.
 Завершающая часть, &sort=stars, сортирует проекты по количеству присвоенных им звезд.
 """
+import requests
+
+# Создание вызова API и сохранение ответа.
+url ='https://api.github.com/search/repositories?q=language:python&sort=stars'
+r = requests.get(url)
+print('Status code: ', r.status_code)   # Код 200 — признак успешного ответа.
+
+# Сохранение ответа API в переменной.
+response_dict = r.json()
+
+# Обработка результатов.
+print(response_dict.keys())     # ['total_count', 'incomplete_results', 'items']
+# total_count - к-во найденных ответов на запрос
+# incomplete_results - false если вызов завершился без ошибки
+# items - список словарей со всеми данными
+
