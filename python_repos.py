@@ -37,8 +37,9 @@ names, plot_dicts = [], []
 for repo_dict in repo_dicts:
     names.append(repo_dict['name'])     # для построения меток оси x
     plot_dict = {
-        'value': repo_dict['stargazers_count'],
-        'label': repo_dict['description']
+        'value': repo_dict['stargazers_count'], # высота столбца
+        'label': repo_dict['description'],      # всплывающая подсказка - описание проекта
+        'xlink': repo_dict['html_url']          # преобразование каждого столбца в активную ссылку
     }
     plot_dicts.append(plot_dict)
     # stars.append(repo_dict['stargazers_count'])
