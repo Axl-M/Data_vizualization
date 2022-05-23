@@ -37,18 +37,11 @@ names, plot_dicts = [], []
 for repo_dict in repo_dicts:
     names.append(repo_dict['name'])     # для построения меток оси x
     plot_dict = {
-        'value': repo_dict['stargazers_count'], # высота столбца
+        'value': repo_dict['stargazers_count'],  # высота столбца
         'label': repo_dict['description'],      # всплывающая подсказка - описание проекта
         'xlink': repo_dict['html_url']          # преобразование каждого столбца в активную ссылку
     }
     plot_dicts.append(plot_dict)
-    # stars.append(repo_dict['stargazers_count'])
-
-    # print('\nName:', repo_dict['name'])
-    # print('Owner:', repo_dict['owner']['login'])
-    # print('Stars:', repo_dict['stargazers_count'])
-    # print('Repository:', repo_dict['html_url'])
-    # print('Description:', repo_dict['description'])
 
 # построение визуализации
 my_style = LS('#333366', base_style=LCS)
@@ -69,4 +62,4 @@ chart.add('', plot_dicts)  # передаем список значений
 # Если передать СПИСОК СЛОВАРЕЙ. Каждый словарь содержит два ключа: 'value' и 'label'.
 # Pygal использует число, связанное с 'value', для определения высоты каждого столбца,
 # а строка, связанная с 'label', используется для создания подсказки столбца.
-chart.render_to_file('python_repos.svg')  # open in browser
+chart.render_to_file('python_repos.svg')  # open this file in browser to see the diagram
